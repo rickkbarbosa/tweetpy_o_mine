@@ -18,19 +18,11 @@ def get_timeline():
     for tweet in timeline:
         print(f"{tweet.user.name} said {tweet.text}")
 
-
 def get_userfollowers(user):
     user = api.get_user(user)
 
-    print("User details:")
-    print(user.name)
-    print(user.description)
-    print(user.location)
-
-    print("Last 20 Followers:")
     for follower in user.followers():
-        print(follower.name)
-
+        print("{} - [ @{} ]".format(follower.name, follower.screen_name))
 
 def tweet_some(message):
     if message is None: 
