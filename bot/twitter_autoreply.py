@@ -13,13 +13,8 @@ def check_mentions(keywords, since_id):
 
     file = open(phrase_file, 'r')
     phrase_dict = file.readlines()
-    
-    #global phrase_dict
-    #phrase_dict = phrase_dict()
-    #print(random.choice(phrase_dict))
-    
+      
     for tweet in tweepy.Cursor(api.mentions_timeline, since_id=since_id ).items():
-        #new_since_id = max(tweet.id, new_since_id)
         if tweet.in_reply_to_status_id is not None:
             print("Não encontrei ninguém com {}", format(tweet_keywords))
             continue

@@ -5,8 +5,6 @@ from twitter_authentication import *
 from twitter_autoreply import *
 from tweet_on_realtime import *
 
-#phrase_dict = None
-
 def phrase_dict():
     global phrase_dict
     file = open(phrase_file, 'r')
@@ -48,10 +46,13 @@ def search_some(text, lang="en"):
 #twitter_realtime(["Disney", "Brazil"], "en")
 
 def main():
-    api = tweepy.API(auth)
-    since_id = 1291000000000000000
+    api = tweepy.API(auth)  
+    since_id = 1293300000000000000
     while True:
-        since_id = check_mentions(tweet_keywords, since_id=since_id)
+        try:
+            since_id = check_mentions(tweet_keywords, since_id=since_id)
+        except:
+            print("No new tweet has found with {}",format(tweet_keywords) )
         #logger.info("Waiting...")
         time.sleep(retrieve_time)
 
