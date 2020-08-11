@@ -2,9 +2,18 @@
 import tweepy
 from settings import *
 from twitter_authentication import *
+from twitter_autoreply import *
 from tweet_on_realtime import *
 
-api = tweepy.API(auth)
+#phrase_dict = None
+
+def phrase_dict():
+    global phrase_dict
+    file = open(phrase_file, 'r')
+    phrase_dict = file.readlines()
+    file.close() 
+
+    return phrase_dict
 
 def authentication_test():
     try:
@@ -33,7 +42,18 @@ def search_some(text, lang="en"):
     for tweet in api.search(q=text, lang=lang, rpp=10):
         print(f"{tweet.user.name}:{tweet.text}")
 
-message = "Postando uma groselha qualquer"
-tweet_some(message)
+#message = "Postando uma groselha qualquer"
+#tweet_some(message)
 #search_some("Anitta", "en")
 #twitter_realtime(["Disney", "Brazil"], "en")
+
+def main():
+    api = tweepy.API(auth)
+    since_id = 1291000000000000000
+    while True:
+        since_id = check_mentions(tweet_keywords, since_id=since_id)
+        #logger.info("Waiting...")
+        time.sleep(retrieve_time)
+
+if __name__ == "__main__":
+    main()
