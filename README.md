@@ -25,7 +25,7 @@ Tweet replies use random sentences located on _phrase_dict.txt_ . You can write 
 
 
 Usage:
-`
+```
 docker run -d \ 
     API_KEY=AAAAAAAAAAAAAAAAAAA \
     API_SECRET_KEY=BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB \
@@ -33,11 +33,11 @@ docker run -d \
     ACCESS_TOKEN_SECRET=bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb \
     TWEET_KEYWORDS="#tags, #separated, #by, #comma" \
     -d rickkbarbosa/tweetpy_o_min
-`
+```
 
 With external phrase dictionary (and env file):
-`
+```
 docker run --env-file=env_file.env \
     -v <external-phrase-dict.txt>:/bot/phrase_dict.txt
     -d rickkbarbosa/tweetpy_o_min
-`
+``` 
