@@ -47,7 +47,9 @@ def tweet_some(message, response=False):
 def search_some(text, lang="en"):
     for tweet in api.search(q=text, lang=lang, rpp=10):
         #print(f"{tweet.user.name}:{tweet.text}")
-        print(colored(tweet.user.name, "red"), "[", colored(tweet.user.screen_name, "red"), "]\n", colored(tweet.text), "white")        
+        tweet_user = colored("{} [ @{} ]\n", 'red').format(tweet.user.name, tweet.user.screen_name)
+        tweet_post = colored("{}", 'white').format(tweet.text)
+        print(tweet_user, tweet_post)   
 
 def main():
     api = tweepy.API(auth)  
