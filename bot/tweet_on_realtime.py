@@ -3,6 +3,7 @@ import tweepy
 import json
 from settings import *
 from twitter_authentication import *
+from termcolor import colored
 
 
 class MyStreamListener(tweepy.StreamListener):
@@ -11,7 +12,10 @@ class MyStreamListener(tweepy.StreamListener):
         self.me = api.me()
 
     def on_status(self, tweet):
-        print(f"{tweet.user.name}:{tweet.text}")
+        #print(f"{tweet.user.name}:{tweet.text}")
+        tweet_user = colored("{} [ @{} ]\n", 'red').format(tweet.user.name, tweet.user.screen_name)
+        tweet_post = colored("{}", 'white').format(tweet.text)
+        print(tweet_user, tweet_post)
 
     def on_error(self, status):
         print("Error detected")

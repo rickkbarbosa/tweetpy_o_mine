@@ -5,6 +5,7 @@ from settings import *
 from twitter_authentication import *
 from twitter_autoreply import *
 from tweet_on_realtime import *
+from termcolor import colored
 
 def phrase_dict():
     global phrase_dict
@@ -30,7 +31,9 @@ def get_userfollowers(user):
     user = api.get_user(user)
 
     for follower in user.followers():
-        print("{} - [ @{} ]".format(follower.name, follower.screen_name))
+        tweet_user = colored("{} [ @{} ]\n", 'red').format(tweet.user.name, tweet.user.screen_name)
+        tweet_post = colored("{}", 'white').format(tweet.text)
+        print(tweet_user, tweet_post)
 
 def tweet_some(message, response=False):   
     if message is None: 
@@ -43,10 +46,8 @@ def tweet_some(message, response=False):
 
 def search_some(text, lang="en"):
     for tweet in api.search(q=text, lang=lang, rpp=10):
-        print(f"{tweet.user.name}:{tweet.text}")
-
-#search_some("Anitta", "en")
-#twitter_realtime(["Disney", "Brazil"], "en")
+        #print(f"{tweet.user.name}:{tweet.text}")
+        print(colored(tweet.user.name, "red"), "[", colored(tweet.user.screen_name, "red"), "]\n", colored(tweet.text), "white")        
 
 def main():
     api = tweepy.API(auth)  
