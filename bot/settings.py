@@ -12,4 +12,6 @@ retrieve_time = 60
 tweet_keywords = os.getenv("TWEET_KEYWORDS")
 tweet_keywords = [i.strip() for i in tweet_keywords.split(',')]
 
+tweet_lang = os.getenv("TWEET_LANG")
+
 phrase_file = "phrase_dict.txt"

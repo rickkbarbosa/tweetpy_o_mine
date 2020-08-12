@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import sys
 import tweepy
 from settings import *
 from twitter_authentication import *
@@ -16,9 +17,9 @@ def phrase_dict():
 def authentication_test():
     try:
         api.verify_credentials()
-        print("Authentication OK")
+        return "Authentication OK"
     except:
-        print("Error during authentication")
+        return "Error during authentication"
 
 def get_timeline():
     timeline = api.home_timeline()
@@ -65,4 +66,25 @@ def main():
         time.sleep(retrieve_time)
 
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) > 0 :
+        parameter = sys.argv[1]
+
+        if parameter == "authentication_test":
+            print(authentication_test())
+            sys.exit()
+        elif parameter == "search_some":
+            search_some(tweet_keywords, tweet_lang)
+            sys.exit()
+        elif parameter == "twitter_realtime":
+            twitter_realtime(tweet_keywords, tweet_lang)
+        elif parameter == "tweet_some":           
+            try:
+                message = sys.argv[2]
+                tweet_some(message)
+                sys.exit()
+            except:
+                print("error while trying tweet")
+        else:
+            main()
+    else:
+        main()
